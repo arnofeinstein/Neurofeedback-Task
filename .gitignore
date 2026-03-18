@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# MATLAB autosave / backup
+*.asv
+*.autosave
+*.m~
+*.mlx~
+
+# MATLAB project metadata
+*.prj
+resources/project/
+
+# Generated outputs
+output/
+results/
+exports/
+
+# Temporary files and folders
+temp/
+tmp/
+cache/
+
+# Editor-specific local settings
+.vscode/settings.json
