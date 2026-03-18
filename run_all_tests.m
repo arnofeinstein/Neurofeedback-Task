@@ -14,6 +14,9 @@ function run_all_tests()
     test_simulate_trial();
     test_simulate_session();
     test_ml_prepare_trial();
+    test_ml_taskobjects_for_trial();
+    test_ml_log_trial_result();
+    test_userloop_monkeylogic_mode();
     test_build_timing_blueprint();
     test_build_error_blueprint();
     test_build_trial_flow_spec();

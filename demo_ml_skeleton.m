@@ -10,6 +10,7 @@ function demo_ml_skeleton()
 
     trial_index = 1;
     [ml_trial, trial_index] = userloop(runtime, trial_index);
+    taskobjects = ml_taskobjects_for_trial(ml_trial);
 
     fprintf('\n=== ML skeleton demo ===\n');
     fprintf('Trial index            : %d\n', trial_index);
@@ -24,4 +25,8 @@ function demo_ml_skeleton()
     fprintf('Correct target pos     : [%.2f, %.2f]\n', ...
         ml_trial.correct_target_pos_deg(1), ...
         ml_trial.correct_target_pos_deg(2));
+    fprintf('Timing file            : %s\n', ml_trial.monkeylogic.timing_file);
+    fprintf('TaskObjects prepared   : %d\n', numel(taskobjects.task_object_strings));
+    fprintf('Rule cue label         : %s\n', ml_trial.display.rule_cue.label);
+    fprintf('Rule cue shape         : %s\n', ml_trial.display.rule_cue.shape);
 end
