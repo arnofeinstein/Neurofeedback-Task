@@ -21,6 +21,9 @@ function run_all_tests()
     test_run_session_flow();
     test_sessionlog_to_table();
     test_export_session_csv();
+    test_build_behavior_schema();
+    test_validate_session_table();
+    test_final_export_pipeline();
 
     fprintf('All tests passed.\n');
 end

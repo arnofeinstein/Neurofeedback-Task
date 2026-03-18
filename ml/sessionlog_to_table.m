@@ -26,6 +26,7 @@ function T = sessionlog_to_table(sessionlog)
     n_trials = sessionlog.n_trials;
     flows = sessionlog.flows;
     runlogs = sessionlog.runlogs;
+    runtime = sessionlog.runtime;
 
     % -------------------------
     % Preallocate columns
@@ -38,6 +39,18 @@ function T = sessionlog_to_table(sessionlog)
     distractor_dir = nan(n_trials, 1);
     distractor_side = nan(n_trials, 1);
     correct_target_angle = nan(n_trials, 1);
+
+    % Timing columns
+    max_acquire_fix_ms = nan(n_trials, 1);
+    initial_fix_ms = nan(n_trials, 1);
+    sample_dur_ms = nan(n_trials, 1);
+    delay_dur_ms = nan(n_trials, 1);
+    distractor_dur_ms = nan(n_trials, 1);
+    max_reaction_time_ms = nan(n_trials, 1);
+    target_hold_ms = nan(n_trials, 1);
+    reward_ms = nan(n_trials, 1);
+    error_timeout_ms = nan(n_trials, 1);
+    iti_ms = nan(n_trials, 1);
 
     final_outcome = cell(n_trials, 1);
     terminal_state = cell(n_trials, 1);
@@ -64,6 +77,26 @@ function T = sessionlog_to_table(sessionlog)
         distractor_dir(k) = get_field_if_present(flow, 'distractor_dir', NaN);
         distractor_side(k) = get_field_if_present(flow, 'distractor_side', NaN);
         correct_target_angle(k) = get_field_if_present(flow, 'correct_target_angle', NaN);
+
+        % Get timing from runtime trials
+        if k <= numel(runtime.trials)
+            trial_struct = runtime.trials(k);
+
+            if isfield(runtime, 'params')
+                params = runtime.params;
+                max_acquire_fix_ms(k) = get_field_if_present(params, 'max_acquire_fix_ms', NaN);
+                initial_fix_ms(k) = get_field_if_present(params, 'initial_fix_ms', NaN);
+                sample_dur_ms(k) = get_field_if_present(params, 'sample_dur_ms', NaN);
+                distractor_dur_ms(k) = get_field_if_present(params, 'distractor_dur_ms', NaN);
+                max_reaction_time_ms(k) = get_field_if_present(params, 'max_reaction_time_ms', NaN);
+                target_hold_ms(k) = get_field_if_present(params, 'target_hold_ms', NaN);
+                reward_ms(k) = get_field_if_present(params, 'reward_ms', NaN);
+                error_timeout_ms(k) = get_field_if_present(params, 'error_timeout_ms', NaN);
+                iti_ms(k) = get_field_if_present(params, 'iti_ms', NaN);
+            end
+
+            delay_dur_ms(k) = get_field_if_present(trial_struct, 'delay_dur_ms', NaN);
+        end
 
         final_outcome{k} = to_char_row(get_field_if_present(runlog, 'final_outcome', 'internal_error'));
         terminal_state{k} = to_char_row(get_field_if_present(runlog, 'terminal_state', 'ERROR'));
@@ -101,12 +134,22 @@ function T = sessionlog_to_table(sessionlog)
         distractor_dir, ...
         distractor_side, ...
         correct_target_angle, ...
-        final_outcome, ...
-        terminal_state, ...
-        completed, ...
+        max_acquire_fix_ms, ...
+        initial_fix_ms, ...
+        sample_dur_ms, ...
+        delay_dur_ms, ...
+        distractor_dur_ms, ...
+        max_reaction_time_ms, ...
+        target_hold_ms, ...
+        reward_ms, ...
+        error_timeout_ms, ...
+        iti_ms, ...
         response_angle, ...
         response_correct, ...
         angular_error_deg, ...
+        final_outcome, ...
+        terminal_state, ...
+        completed, ...
         n_states_visited, ...
         last_state_name);
 
@@ -116,7 +159,7 @@ end
 function value = get_field_if_present(s, field_name, default_value)
 %GET_FIELD_IF_PRESENT Safe field getter.
 
-    if isfield(s, field_name)
+    if isstruct(s) && isfield(s, field_name)
         value = s.(field_name);
     else
         value = default_value;
