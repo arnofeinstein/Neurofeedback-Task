@@ -60,7 +60,7 @@ function [task_object_strings, timingfile, userdefined_trialholder] = ...
         prepare_monkeylogic_trial(~, TrialRecord)
 %PREPARE_MONKEYLOGIC_TRIAL Prepare task objects and condition info for ML.
 
-    persistent runtime initialized_timing_file
+    persistent runtime
 
     timingfile = 'tf_rule_rdk.m';
     userdefined_trialholder = '';
@@ -68,11 +68,6 @@ function [task_object_strings, timingfile, userdefined_trialholder] = ...
 
     if isempty(runtime)
         runtime = task_main();
-    end
-
-    if isempty(initialized_timing_file)
-        initialized_timing_file = true;
-        return;
     end
 
     if ~isstruct(TrialRecord) && ~isobject(TrialRecord)
@@ -134,8 +129,21 @@ end
 function set_current_condition_info(TrialRecord, condition_info)
 %SET_CURRENT_CONDITION_INFO Pass condition metadata into MonkeyLogic runtime.
 
-    if isobject(TrialRecord) && ismethod(TrialRecord, 'setCurrentConditionInfo')
-        TrialRecord.setCurrentConditionInfo(condition_info);
+    if isobject(TrialRecord)
+        if ismethod(TrialRecord, 'setCurrentConditionInfo')
+            TrialRecord.setCurrentConditionInfo(condition_info);
+        elseif isprop(TrialRecord, 'CurrentConditionInfo')
+            TrialRecord.CurrentConditionInfo = condition_info;
+        end
+
+        if isprop(TrialRecord, 'User')
+            trial_user = TrialRecord.User;
+            if isempty(trial_user) || ~isstruct(trial_user)
+                trial_user = struct();
+            end
+            trial_user.condition_info = condition_info;
+            TrialRecord.User = trial_user;
+        end
     elseif isstruct(TrialRecord)
         % No-op outside MonkeyLogic. Struct inputs are used only for tests/scaffolds.
     end

@@ -117,6 +117,12 @@ function display = build_display_bundle(trial, params)
 
     display = struct();
 
+    display.fixation = struct();
+    display.fixation.size_deg = 0.50;
+    display.fixation.edge_color_rgb = [0.95, 0.95, 0.95];
+    display.fixation.face_color_rgb = [0.95, 0.95, 0.95];
+    display.fixation.position_deg = [0, 0];
+
     display.sample_placeholder = struct();
     display.sample_placeholder.shape = 'bar';
     display.sample_placeholder.size_deg = [params.sample_size_deg, 0.45];

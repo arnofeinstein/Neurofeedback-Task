@@ -26,6 +26,7 @@ function test_ml_prepare_trial()
     assert(strcmp(ml_trial.monkeylogic.timing_file, 'tf_rule_rdk.m'));
     assert(ml_trial.monkeylogic.placeholder_mode == true);
     assert(isfield(ml_trial.display, 'rule_cue'));
+    assert(isfield(ml_trial.display, 'fixation'));
     assert(isfield(ml_trial.display, 'sample_placeholder'));
     assert(isfield(ml_trial.display, 'distractor_placeholder'));
     expected_shapes = struct('pro', 'square', 'anti', 'circle', 'plus90', 'triangle');

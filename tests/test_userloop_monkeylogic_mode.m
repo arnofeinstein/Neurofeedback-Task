@@ -5,7 +5,8 @@ function test_userloop_monkeylogic_mode()
 
     [C_init, timingfile_init, holder_init] = userloop(struct(), struct());
 
-    assert(isempty(C_init));
+    assert(iscell(C_init));
+    assert(~isempty(C_init));
     assert(strcmp(timingfile_init, 'tf_rule_rdk.m'));
     assert(ischar(holder_init) || isempty(holder_init));
 
