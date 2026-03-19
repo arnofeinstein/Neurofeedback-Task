@@ -6,16 +6,8 @@ function [C, timingfile, userdefined_trialholder] = ...
 % more closely than the adapter-only smoke test. It is intended to isolate
 % whether userloop-driven TaskObjects render correctly on the target rig.
 
-    persistent initialized
-
     timingfile = 'tf_visual_taskobjects_smoke.m';
     userdefined_trialholder = '';
-    C = {};
-
-    if isempty(initialized)
-        initialized = true;
-        return;
-    end
 
     C = { ...
         'crc(1.000,[1.000 1.000 1.000],1,0.000,0.000)', ...
