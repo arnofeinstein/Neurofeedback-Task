@@ -4,11 +4,17 @@ function tf_visual_taskobjects_smoke(~, ~)
     require_monkeylogic_runtime();
 
     dashboard(1, 'visual taskobjects smoke');
-    dashboard(2, 'expect white center circle + red/green bars');
+    dashboard(2, 'expect white center circle + red/green bars for 5 s');
 
-    hold = TimeCounter(null_);
-    hold.Duration = 2000;
-    scene = create_scene(hold, [1 2 3]);
+    fix = SingleTarget(eye_);
+    fix.Target = 1;  % TaskObject #1
+    fix.Threshold = 3;
+
+    wth = WaitThenHold(fix);
+    wth.WaitTime = 5000;
+    wth.HoldTime = 0;
+
+    scene = create_scene(wth, [1 2 3]);
     run_scene(scene);
 
     trialerror(0);
@@ -22,7 +28,8 @@ function require_monkeylogic_runtime()
     required_symbols = { ...
         'create_scene', ...
         'run_scene', ...
-        'TimeCounter', ...
+        'SingleTarget', ...
+        'WaitThenHold', ...
         'trialerror', ...
         'idle', ...
         'dashboard'};
