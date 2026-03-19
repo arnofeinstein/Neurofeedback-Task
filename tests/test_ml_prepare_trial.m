@@ -25,6 +25,7 @@ function test_ml_prepare_trial()
     assert(sum([ml_trial.response_targets.is_correct]) == 1);
     assert(strcmp(ml_trial.monkeylogic.timing_file, 'tf_rule_rdk.m'));
     assert(ml_trial.monkeylogic.placeholder_mode == true);
+    assert(ml_trial.monkeylogic.debug_visual_probe == true);
     assert(isfield(ml_trial.display, 'rule_cue'));
     assert(isfield(ml_trial.display, 'fixation'));
     assert(isfield(ml_trial.display, 'sample_placeholder'));

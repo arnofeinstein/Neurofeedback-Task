@@ -87,6 +87,7 @@ function ml_trial = ml_prepare_trial(trial, params)
     ml_trial.monkeylogic = struct();
     ml_trial.monkeylogic.timing_file = 'tf_rule_rdk.m';
     ml_trial.monkeylogic.placeholder_mode = true;
+    ml_trial.monkeylogic.debug_visual_probe = true;
 
 end
 
