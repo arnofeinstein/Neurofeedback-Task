@@ -18,6 +18,7 @@ function run_all_tests()
     test_ml_log_trial_result();
     test_userloop_monkeylogic_mode();
     test_userloop_visual_smoke();
+    test_userloop_visual_taskobjects_smoke();
     test_build_timing_blueprint();
     test_build_error_blueprint();
     test_build_trial_flow_spec();
