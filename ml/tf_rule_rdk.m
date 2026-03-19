@@ -345,20 +345,20 @@ function condition_info = read_condition_info(TrialRecord)
     condition_info = [];
 
     if isstruct(TrialRecord)
-        if isfield(TrialRecord, 'CurrentConditionInfo')
-            condition_info = TrialRecord.CurrentConditionInfo;
-        end
-        if isempty(condition_info) && isfield(TrialRecord, 'User') && ...
+        if isfield(TrialRecord, 'User') && ...
                 isstruct(TrialRecord.User) && isfield(TrialRecord.User, 'condition_info')
             condition_info = TrialRecord.User.condition_info;
+        end
+        if isempty(condition_info) && isfield(TrialRecord, 'CurrentConditionInfo')
+            condition_info = TrialRecord.CurrentConditionInfo;
         end
     elseif isobject(TrialRecord)
-        if isprop(TrialRecord, 'CurrentConditionInfo')
-            condition_info = TrialRecord.CurrentConditionInfo;
-        end
-        if isempty(condition_info) && isprop(TrialRecord, 'User') && ...
+        if isprop(TrialRecord, 'User') && ...
                 isstruct(TrialRecord.User) && isfield(TrialRecord.User, 'condition_info')
             condition_info = TrialRecord.User.condition_info;
+        end
+        if isempty(condition_info) && isprop(TrialRecord, 'CurrentConditionInfo')
+            condition_info = TrialRecord.CurrentConditionInfo;
         end
     end
 
