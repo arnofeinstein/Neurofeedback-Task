@@ -231,3 +231,5 @@ Current simulation and export layers use:
 The current `ml/` layer is a clean porting scaffold, not a fully validated MonkeyLogic task yet. Actual runtime validation must be done on a Windows machine with MATLAB and MonkeyLogic v2 installed.
 
 For MonkeyLogic-specific details and remaining porting work, see [docs/PORTING_TO_MONKEYLOGIC.md](/Users/arnofeinstein/Documents/Ibos_Lab/NeurofeedbackTask/docs/PORTING_TO_MONKEYLOGIC.md).
+
+For the first real Windows launch, use [docs/FIRST_MONKEYLOGIC_LAUNCH_CHECKLIST.md](/Users/arnofeinstein/Documents/Ibos_Lab/NeurofeedbackTask/docs/FIRST_MONKEYLOGIC_LAUNCH_CHECKLIST.md).

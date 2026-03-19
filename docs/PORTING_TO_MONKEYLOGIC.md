@@ -63,3 +63,5 @@ This keeps the future path open for replacing the sample and distractor placehol
 
 - Repository-level unit tests cover the new `ml_prepare_trial()` fields, the task-object bundle, the result logger, and the MonkeyLogic-style `userloop()` bridge.
 - Actual execution of `tf_rule_rdk.m` is not validated in this repository because MonkeyLogic and MATLAB are not available on the current machine.
+
+For the first real runtime test on Windows, use [FIRST_MONKEYLOGIC_LAUNCH_CHECKLIST.md](/Users/arnofeinstein/Documents/Ibos_Lab/NeurofeedbackTask/docs/FIRST_MONKEYLOGIC_LAUNCH_CHECKLIST.md).
