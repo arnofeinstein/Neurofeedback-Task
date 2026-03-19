@@ -1,25 +1,25 @@
-function tf_visual_taskobjects_smoke(~, ~)
 %TF_VISUAL_TASKOBJECTS_SMOKE Minimal v2 smoke test using TaskObjects only.
+%
+% This is intentionally a MonkeyLogic timing script, not a MATLAB function.
 
-    require_monkeylogic_runtime();
+require_monkeylogic_runtime();
 
-    dashboard(1, 'visual taskobjects smoke');
-    dashboard(2, 'expect white center circle + red/green bars for 5 s');
+dashboard(1, 'visual taskobjects smoke');
+dashboard(2, 'expect white center circle + red/green bars for 5 s');
 
-    fix = SingleTarget(eye_);
-    fix.Target = 1;  % TaskObject #1
-    fix.Threshold = 3;
+fix = SingleTarget(eye_);
+fix.Target = 1;  % TaskObject #1
+fix.Threshold = 3;
 
-    wth = WaitThenHold(fix);
-    wth.WaitTime = 5000;
-    wth.HoldTime = 0;
+wth = WaitThenHold(fix);
+wth.WaitTime = 5000;
+wth.HoldTime = 0;
 
-    scene = create_scene(wth, [1 2 3]);
-    run_scene(scene);
+scene = create_scene(wth, [1 2 3]);
+run_scene(scene);
 
-    trialerror(0);
-    idle(500);
-end
+trialerror(0);
+idle(500);
 
 
 function require_monkeylogic_runtime()

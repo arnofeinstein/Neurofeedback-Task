@@ -1,4 +1,3 @@
-function tf_visual_smoke_test(~, ~)
 %TF_VISUAL_SMOKE_TEST Minimal MonkeyLogic v2 rendering smoke test.
 %
 % Purpose:
@@ -6,42 +5,39 @@ function tf_visual_smoke_test(~, ~)
 %   2. present large centered and lateral graphic objects
 %   3. avoid all tracker/fixation/userloop task logic
 %
-% If this timing file does not visibly render on the subject screen, the
-% problem is outside the task scaffold and should be treated as a MonkeyLogic
-% display/runtime configuration issue.
+% This is intentionally a MonkeyLogic timing script, not a MATLAB function.
 
-    require_monkeylogic_runtime();
+require_monkeylogic_runtime();
 
-    dashboard(1, 'visual smoke test');
-    dashboard(2, 'expect full-screen flashes, then big shapes');
+dashboard(1, 'visual smoke test');
+dashboard(2, 'expect full-screen flashes, then big shapes');
 
-    flash = BackgroundColorChanger(null_);
-    flash.List = [ ...
-        1.0 1.0 1.0 250; ...
-        0.0 0.0 0.0 250; ...
-        1.0 0.0 0.0 250; ...
-        0.0 1.0 0.0 250; ...
-        0.0 0.0 1.0 250];
-    flash.DurationUnit = 'msec';
+flash = BackgroundColorChanger(null_);
+flash.List = [ ...
+    1.0 1.0 1.0 250; ...
+    0.0 0.0 0.0 250; ...
+    1.0 0.0 0.0 250; ...
+    0.0 1.0 0.0 250; ...
+    0.0 0.0 1.0 250];
+flash.DurationUnit = 'msec';
 
-    scene = create_scene(flash);
-    run_scene(scene);
+scene = create_scene(flash);
+run_scene(scene);
 
-    hold = TimeCounter(null_);
-    hold.Duration = 2000;
+hold = TimeCounter(null_);
+hold.Duration = 2000;
 
-    graphics = BoxGraphic(hold);
-    graphics.List = { ...
-        [1.0 1.0 1.0], [1.0 1.0 1.0], [3.0 3.0], [0.0 0.0]; ...
-        [1.0 0.0 0.0], [1.0 0.0 0.0], [4.0 0.8], [-6.0 0.0]; ...
-        [0.0 1.0 0.0], [0.0 1.0 0.0], [4.0 0.8], [6.0 0.0]};
+graphics = BoxGraphic(hold);
+graphics.List = { ...
+    [1.0 1.0 1.0], [1.0 1.0 1.0], [3.0 3.0], [0.0 0.0]; ...
+    [1.0 0.0 0.0], [1.0 0.0 0.0], [4.0 0.8], [-6.0 0.0]; ...
+    [0.0 1.0 0.0], [0.0 1.0 0.0], [4.0 0.8], [6.0 0.0]};
 
-    scene = create_scene(graphics);
-    run_scene(scene);
+scene = create_scene(graphics);
+run_scene(scene);
 
-    trialerror(0);
-    idle(500);
-end
+trialerror(0);
+idle(500);
 
 
 function require_monkeylogic_runtime()
