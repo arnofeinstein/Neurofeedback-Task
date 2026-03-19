@@ -1,0 +1,2 @@
+Condition	Frequency	Block	Timing File	TaskObject#1	TaskObject#2	TaskObject#3
+1	1	1	tf_visual_taskobjects_smoke	crc(1.000,[1.000 1.000 1.000],1,0.000,0.000)	sqr([4.000 0.800],[1.000 0.000 0.000],1,-6.000,0.000)	sqr([4.000 0.800],[0.000 1.000 0.000],1,6.000,0.000)
